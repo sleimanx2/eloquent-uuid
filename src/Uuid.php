@@ -36,7 +36,6 @@ trait Uuid
          */
         static::creating(function ($model) {
             $model->{$model->getUuidField()} = (string)$model->generateUuid();
-            dd($model);
         });
     }
 
