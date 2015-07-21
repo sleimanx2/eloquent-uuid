@@ -5,7 +5,6 @@ namespace EloquentUuid;
 trait Uuid
 {
 
-
     /**
      * Uuid constructor.
      */
@@ -39,8 +38,39 @@ trait Uuid
         });
     }
 
+
     /**
-     * Get a new version 1 (time based) UUID.
+     * @return mixed
+     */
+    public function getUuidField()
+    {
+        // if the uuidField is undefined return the primary key
+        if (!$this->uuidField) {
+            return $this->getKeyName();
+        }
+        return $this->uuidField;
+    }
+
+
+    /**
+     * @return int
+     * @throws \Exception
+     */
+    public function getUuidVersion()
+    {
+        if ($this->uuidVersion) {
+            if (!in_array($this->uuidVersion, [1, 4])) {
+                throw new \Exception("uuid " . $this->uuidVersion . " is not supported or not valid.");
+            }
+
+            return $this->uuidVersion;
+        }
+
+        return 1;
+    }
+
+    /**
+     * Get a new Uuid.
      * @return \Rhumsaa\Uuid\Uuid
      *
      * uuid1() generates a UUID based on the current time and the MAC address of the machine.
@@ -65,37 +95,9 @@ trait Uuid
      */
     public function generateUuid()
     {
-        $version = "uuid".$this->getUuidVersion();
+        $version = "uuid" . $this->getUuidVersion();
 
         return \Rhumsaa\Uuid\Uuid::$version()->toString();
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getUuidField()
-    {
-        // if the uuidField is undefined return the primary key
-        if (!$this->uuidField) {
-            return $this->getKeyName();
-        }
-        return $this->uuidField;
-    }
-
-    /**
-     *
-     */
-    public function getUuidVersion()
-    {
-        if ($this->uuidVersion) {
-            if (!in_array($this->uuidVersion, [1, 4]))
-                throw new \Exception("uuid ".$this->uuidVersion." is not supported or not valid.");
-
-            return $this->uuidVersion;
-        }
-
-        return 1;
     }
 
 }
