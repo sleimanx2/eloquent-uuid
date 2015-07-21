@@ -7,16 +7,18 @@ trait Uuid
 
     /**
      * Uuid constructor.
+     * @param array $attributes
      */
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
+        parent::__construct($attributes);
 
         // If the uuid is the primary key disable incrementing.
         if ($this->getUuidField() == $this->getKeyName()) {
             $this->incrementing = false;
         }
 
-        parent::__construct();
+
     }
 
 
