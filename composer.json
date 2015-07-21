@@ -1,0 +1,17 @@
+{
+  "name": "sleimanx2/eloquent-uuid",
+  "autoload": {
+    "psr-4": {
+      "EloquentUuid\\": "src/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "ramsey/uuid": "~2.8"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "EloquentUuid\\Tests\\": "tests/"
+    }
+  }
+}
