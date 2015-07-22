@@ -39,7 +39,9 @@ currently this package only supports version 1 and 4
 ```
 class Type extends Model {
 
-    use Uuid  { boot as uuidBoot; }
+    use Uuid  {
+        boot as uuidBoot;
+    }
 	
     
     public static function boot()
