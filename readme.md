@@ -34,6 +34,25 @@ protected $uuidVersion = 4;
 ```
 currently this package only supports version 1 and 4
 
+<strong>In some cases when you need to integrate Uuid with a model that already contain a boot method</strong>
+
+```
+class Type extends Model {
+
+    use Uuid  { boot as uuidBoot; }
+	
+    
+    public static function boot()
+    {
+        self::uuidBoot();
+        
+        // your logic here , parent::boot() is unnecessary 
+    }
+
+}
+```
+
+
 ## Chosing Uuid version.
 
 <strong>1- uuid1() generates a UUID based on the current time and the MAC address of the machine.</strong>
