@@ -1,7 +1,7 @@
 ## Eloquent Uuid
 
 
-Simple eloquent behavior to use uuid as a primary key or as a separate field by listening to eloquen's creating event.
+Simple laravel / eloquent behavior to use uuid as a primary key or as a separate field by listening to eloquen's creating event.
 
 
 ### Usage

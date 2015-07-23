@@ -1,5 +1,7 @@
 {
   "name": "sleimanx2/eloquent-uuid",
+  "description": "Uuid for laravel's eloquent.",
+  "keywords": ["framework", "laravel","eloquent","uuid"],
   "autoload": {
     "psr-4": {
       "EloquentUuid\\": "src/"
