@@ -5,22 +5,6 @@ namespace EloquentUuid;
 trait Uuid
 {
 
-    /**
-     * Uuid constructor.
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        // If the uuid is the primary key disable incrementing.
-        if ($this->getUuidField() == $this->getKeyName()) {
-            $this->incrementing = false;
-        }
-
-
-    }
-
 
     /**
      * The "booting" method of the model.
@@ -48,9 +32,19 @@ trait Uuid
     {
         // if the uuidField is undefined return the primary key
         if (!$this->uuidField) {
-            return $this->getKeyName();
+            $field = $this->getKeyName();
         }
-        return $this->uuidField;
+        else
+        {
+            $field = $this->uuidField;
+        }
+
+        // If the uuid is the primary key disable incrementing.
+        if ($field == $this->getKeyName()) {
+            $this->incrementing = false;
+        }
+
+        return $field;
     }
 
 
