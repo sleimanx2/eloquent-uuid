@@ -8,8 +8,8 @@
     }
   },
   "require":{
-    "illuminate/support": "5.2.*",
-    "illuminate/database": "5.2.*",
+    "illuminate/support": "5.*",
+    "illuminate/database": "5.*",
     "ramsey/uuid": "~2.8"
   },
   "require-dev": {
