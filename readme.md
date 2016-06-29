@@ -1,8 +1,6 @@
 ## Eloquent Uuid
 
-
-Simple laravel / eloquent behavior to use uuid as a primary key or as a separate field by listening to eloquen's creating event.
-
+Simple laravel / eloquent behavior to use uuid as a primary key or as a separate field by listening to Eloquent's creating event.
 
 ### Usage
 
@@ -19,40 +17,18 @@ class Category extends Model
 <strong> You can define the field to store the uuid in as follows (default: primary key) </strong>
 
 
-```
+```php
 protected $uuidField = 'uuid';
-
 ```
 
 
 <strong> You can define the uuid version as follows (default: version 1) </strong>
 
 
-```
+```php
 protected $uuidVersion = 4;
-
 ```
 currently this package only supports version 1 and 4
-
-<strong>In some cases when you need to integrate Uuid with a model that already contain a boot method</strong>
-
-```
-class Type extends Model {
-
-    use Uuid  {
-        boot as uuidBoot;
-    }
-	
-    
-    public static function boot()
-    {
-        self::uuidBoot();
-        
-        // your logic here , parent::boot() is unnecessary 
-    }
-
-}
-```
 
 
 ## Chosing Uuid version.
