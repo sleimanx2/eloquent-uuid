@@ -1,4 +1,5 @@
 ## Eloquent Uuid
+[![Build Status](https://travis-ci.org/sleimanx2/eloquent-uuid.svg?branch=master)](https://travis-ci.org/sleimanx2/eloquent-uuid)
 
 Simple laravel / eloquent behavior to use uuid as a primary key or as a separate field by listening to Eloquent's creating event.
 
