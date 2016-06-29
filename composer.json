@@ -1,7 +1,17 @@
 {
   "name": "sleimanx2/eloquent-uuid",
+  "license": "MIT",
   "description": "Uuid for laravel's eloquent.",
   "keywords": ["framework", "laravel","eloquent","uuid"],
+  "homepage": "https://github.com/sleimanx2/eloquent-uuid",
+  "authors": [
+   {
+     "name": "Sleiman Sleiman",
+     "email": "sleiman@outlook.com",
+     "homepage": "http://bowtie.land",
+     "role": "Developer"
+   }
+ ],
   "autoload": {
     "psr-4": {
       "EloquentUuid\\": "src/"
