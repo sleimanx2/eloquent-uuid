@@ -113,4 +113,3 @@ class TestModel extends Model {
 
     protected $fillable = array('name');
 }
-
