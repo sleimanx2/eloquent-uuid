@@ -91,7 +91,7 @@ trait Uuid
     {
         $version = "uuid" . $this->getUuidVersion();
 
-        return \Rhumsaa\Uuid\Uuid::$version()->toString();
+        return \Ramsey\Uuid\Uuid::$version()->toString();
     }
 
 }

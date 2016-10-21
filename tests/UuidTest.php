@@ -87,8 +87,6 @@ class UuidTest extends \PHPUnit_Framework_TestCase
         $attributes = $model->toArray();
 
         $this->assertTrue(isset($attributes['uuid']));
-
-
     }
 
     /**
