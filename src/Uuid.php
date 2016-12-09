@@ -4,24 +4,19 @@ namespace EloquentUuid;
 
 trait Uuid
 {
-
-
     /**
      * The "booting" method of the model.
-     *
-     * @return void
      */
     protected static function bootUuid()
     {
         /**
          * Attach to the 'creating' Model Event to provide a UUID
-         * for the `id` field (provided by $model->getKeyName())
+         * for the `id` field (provided by $model->getKeyName()).
          */
         static::creating(function ($model) {
-            $model->{$model->getUuidField()} = (string)$model->generateUuid();
+            $model->{$model->getUuidField()} = (string) $model->generateUuid();
         });
     }
-
 
     /**
      * @return mixed
@@ -31,9 +26,7 @@ trait Uuid
         // if the uuidField is undefined return the primary key
         if (!$this->uuidField) {
             $field = $this->getKeyName();
-        }
-        else
-        {
+        } else {
             $field = $this->uuidField;
         }
 
@@ -45,16 +38,16 @@ trait Uuid
         return $field;
     }
 
-
     /**
      * @return int
+     *
      * @throws \Exception
      */
     public function getUuidVersion()
     {
         if ($this->uuidVersion) {
             if (!in_array($this->uuidVersion, [1, 4])) {
-                throw new \Exception("uuid " . $this->uuidVersion . " is not supported or not valid.");
+                throw new \Exception('uuid '.$this->uuidVersion.' is not supported or not valid.');
             }
 
             return $this->uuidVersion;
@@ -65,6 +58,7 @@ trait Uuid
 
     /**
      * Get a new Uuid.
+     *
      * @return \Rhumsaa\Uuid\Uuid
      *
      * uuid1() generates a UUID based on the current time and the MAC address of the machine.
@@ -89,9 +83,49 @@ trait Uuid
      */
     public function generateUuid()
     {
-        $version = "uuid" . $this->getUuidVersion();
+        $version = 'uuid'.$this->getUuidVersion();
 
         return \Ramsey\Uuid\Uuid::$version()->toString();
     }
 
+    /**
+     * Scope a query to only include models matching the supplied ID or UUID.
+     * Returns the model by default, or supply a second flag `false` to get the Query Builder instance.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @param \Illuminate\Database\Schema\Builder $query The Query Builder instance.
+     * @param string                              $uuid  The UUID of the model.
+     * @param bool|true                           $first Returns the model by default, or set to `false` to chain for query builder.
+     *
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeIdOrUuId($query, $id_or_uuid, $first = true)
+    {
+
+        $search = $query->where(function ($query) use ($id_or_uuid) {
+            $query->where('id', $id_or_uuid)
+                ->orWhere('uuid', $id_or_uuid);
+        });
+
+        return $first ? $search->first() : $search;
+    }
+
+    /**
+     * Scope a query to only include models matching the supplied UUID.
+     * Returns the model by default, or supply a second flag `false` to get the Query Builder instance.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @param  \Illuminate\Database\Schema\Builder $query The Query Builder instance.
+     * @param  string                              $uuid  The UUID of the model.
+     * @param  bool|true                           $first Returns the model by default, or set to `false` to chain for query builder.
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUuid($query, $uuid, $first = true)
+    {
+        $search = $query->where('uuid', $uuid);
+
+        return $first ? $search->first(): $search;
+    }
 }
