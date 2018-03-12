@@ -91,14 +91,24 @@ trait Uuid
     /**
      * Scope a query to only include models matching the supplied ID or UUID.
      * Returns the model by default, or supply a second flag `false` to get the Query Builder instance.
+     *     *
+     * @param string $uuid The UUID of the model.
      *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @return \Illuminate\Database\Eloquent\Model | Null
+     */
+    public function findByUuid($uuid)
+    {
+        return $this->where('uuid', $uuid)->first();
+    }
+
+    /**
+     * Scope a query to only include models matching the supplied ID or UUID.
+     * Returns the model by default, or supply a second flag `false` to get the Query Builder instance.
      *
      * @param \Illuminate\Database\Schema\Builder $query The Query Builder instance.
      * @param string                              $uuid  The UUID of the model.
-     * @param bool|true                           $first Returns the model by default, or set to `false` to chain for query builder.
      *
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeIdOrUuId($query, $id_or_uuid)
     {
@@ -115,12 +125,10 @@ trait Uuid
      * Scope a query to only include models matching the supplied UUID.
      * Returns the model by default, or supply a second flag `false` to get the Query Builder instance.
      *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     *
      * @param  \Illuminate\Database\Schema\Builder $query The Query Builder instance.
      * @param  string                              $uuid  The UUID of the model.
-     * @param  bool|true                           $first Returns the model by default, or set to `false` to chain for query builder.
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeUuid($query, $uuid, $first = true)
     {
