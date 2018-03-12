@@ -100,15 +100,15 @@ trait Uuid
      *
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
      */
-    public function scopeIdOrUuId($query, $id_or_uuid, $first = true)
+    public function scopeIdOrUuId($query, $id_or_uuid)
     {
 
-        $search = $query->where(function ($query) use ($id_or_uuid) {
+        $query = $query->where(function ($query) use ($id_or_uuid) {
             $query->where('id', $id_or_uuid)
                 ->orWhere('uuid', $id_or_uuid);
         });
 
-        return $first ? $search->first() : $search;
+        return $query;
     }
 
     /**
@@ -124,8 +124,8 @@ trait Uuid
      */
     public function scopeUuid($query, $uuid, $first = true)
     {
-        $search = $query->where('uuid', $uuid);
+        $query = $query->where('uuid', $uuid);
 
-        return $first ? $search->first(): $search;
+        return $query;
     }
 }
